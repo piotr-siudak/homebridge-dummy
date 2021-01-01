@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "DummySwitch",
+    "pluginAlias": "DummySwitchWithAccessoryInformation",
     "pluginType": "accessory",
     "singular": false,
     "schema": {

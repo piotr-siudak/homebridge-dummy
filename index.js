@@ -7,10 +7,10 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
-  homebridge.registerAccessory("homebridge-dummy", "DummySwitch", DummySwitch);
+  homebridge.registerAccessory("homebridge-dummy-with-accessoryinformation", "DummySwitchWithAccessoryInformation", DummySwitchWithAccessoryInformation);
 }
 
-function DummySwitch(log, config) {
+function DummySwitchWithAccessoryInformation(log, config) {
   this.log = log;
   this.name = config.name;
   this.stateful = config.stateful;
@@ -47,11 +47,11 @@ function DummySwitch(log, config) {
   }
 }
 
-DummySwitch.prototype.getServices = function() {
+DummySwitchWithAccessoryInformation.prototype.getServices = function() {
   return [this.informationService, this._service];
 }
 
-DummySwitch.prototype._setOn = function(on, callback) {
+DummySwitchWithAccessoryInformation.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 

@@ -6,7 +6,7 @@ Example config.json:
 ```
     "accessories": [
         {
-          "accessory": "DummySwitch",
+          "accessory": "DummySwitchWithAccessoryInformation",
           "name": "My Switch 1"
         }   
     ]
@@ -26,7 +26,7 @@ The default behavior of a dummy switch is to turn itself off one second after be
 ```
     "accessories": [
         {
-          "accessory": "DummySwitch",
+          "accessory": "DummySwitchWithAccessoryInformation",
           "name": "My Stateful Switch 1",
           "stateful": true
         }   
@@ -41,7 +41,7 @@ You may also want to create a dummy switch that turns itself on one second after
 ```
     "accessories": [
         {
-          "accessory": "DummySwitch",
+          "accessory": "DummySwitchWithAccessoryInformation",
           "name": "My Stateful Switch 1",
           "reverse": true
         }   
@@ -56,7 +56,7 @@ You may also want to create a timed switch that turns itself off after being on 
 ```
     "accessories": [
         {
-          "accessory": "DummySwitch",
+          "accessory": "DummySwitchWithAccessoryInformation",
           "name": "My Stateful Switch 1",
           "time": 5000
         }   
