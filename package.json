@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-dummy",
+  "name": "homebridge-dummy-with-accessoryinformation",
   "version": "0.4.1",
   "description": "Dummy switches for Homebridge: https://github.com/piotr-siudak/homebridge-dummy-with-accessoryinformation",
   "license": "ISC",
