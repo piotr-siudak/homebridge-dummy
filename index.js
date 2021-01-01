@@ -15,30 +15,40 @@ function DummySwitch(log, config) {
   this.name = config.name;
   this.stateful = config.stateful;
   this.reverse = config.reverse;
-  this.time = config.time ? config.time : 1000;		
+  this.time = config.time ? config.time : 1000;
   this._service = new Service.Switch(this.name);
-  
+
+  this.informationService = new Service.AccessoryInformation();
+  this.informationService
+    .setCharacteristic(Characteristic.Manufacturer, 'Homebridge')
+    .setCharacteristic(Characteristic.Model, 'Dummy Switch')
+    .setCharacteristic(Characteristic.FirmwareRevision, '1.2.3')
+    .setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
+
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
-  this.storage.initSync({dir:this.cacheDirectory, forgiveParseErrors: true});
-  
+  this.storage.initSync({
+    dir: this.cacheDirectory,
+    forgiveParseErrors: true
+  });
+
   this._service.getCharacteristic(Characteristic.On)
     .on('set', this._setOn.bind(this));
 
   if (this.reverse) this._service.setCharacteristic(Characteristic.On, true);
 
   if (this.stateful) {
-	var cachedState = this.storage.getItemSync(this.name);
-	if((cachedState === undefined) || (cachedState === false)) {
-		this._service.setCharacteristic(Characteristic.On, false);
-	} else {
-		this._service.setCharacteristic(Characteristic.On, true);
-	}
+    var cachedState = this.storage.getItemSync(this.name);
+    if ((cachedState === undefined) || (cachedState === false)) {
+      this._service.setCharacteristic(Characteristic.On, false);
+    } else {
+      this._service.setCharacteristic(Characteristic.On, true);
+    }
   }
 }
 
 DummySwitch.prototype.getServices = function() {
-  return [this._service];
+  return [this.informationService, this._service];
 }
 
 DummySwitch.prototype._setOn = function(on, callback) {
@@ -54,10 +64,10 @@ DummySwitch.prototype._setOn = function(on, callback) {
       this._service.setCharacteristic(Characteristic.On, true);
     }.bind(this), this.time);
   }
-  
+
   if (this.stateful) {
-	this.storage.setItemSync(this.name, on);
+    this.storage.setItemSync(this.name, on);
   }
-  
+
   callback();
 }
