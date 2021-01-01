@@ -1,5 +1,5 @@
 
-# "Dummy Switches" Plugin
+# "Dummy Switches With Accessory Information" Plugin
 
 Example config.json:
 
